@@ -16,7 +16,7 @@ display.start()
 
 def scrape_linkedin_jobs(job_title: str, location: str, pages: int = None) -> list:
     # Sets the pages to scrape if not provided
-    pages = 5
+    pages = 3
 
     chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                         # and if it doesn't exist, download it automatically,
@@ -155,6 +155,9 @@ def save_job_data(data: dict) -> None:
 
     # Create a pandas DataFrame from the job data dictionary
     df = pd.DataFrame(data)
+
+    #create a csv file
+    # df.to_csv('jobs.csv', index=False)
 
     # update content in README.md between <!--START_SECTION:workfetch--> and <!--END_SECTION:workfetch-->
     readme = open('README.md', 'r')

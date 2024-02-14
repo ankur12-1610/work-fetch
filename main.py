@@ -11,6 +11,7 @@ import pandas as pd
 import random
 import time
 from pyvirtualdisplay import Display
+
 display = Display(visible=0, size=(800, 800))
 display.start()
 
@@ -56,6 +57,8 @@ def scrape_linkedin_jobs(job_title: str, location: str, pages: int = None) -> li
         logging.info(f"Scrolling to bottom of page {i+1}...")
 
         # Scroll to the bottom of the page using JavaScript
+        # before scrolling, we need to wait for the page to load
+        time.sleep(random.choice(list(range(3, 7))))
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
         try:

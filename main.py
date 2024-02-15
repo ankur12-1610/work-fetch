@@ -57,8 +57,7 @@ def scrape_linkedin_jobs(job_title: str, location: str, pages: int = None) -> li
         logging.info(f"Scrolling to bottom of page {i+1}...")
 
         # Scroll to the bottom of the page using JavaScript
-        # before scrolling, we need to wait for the page to load
-        time.sleep(random.choice(list(range(3, 7))))
+
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
         try:
@@ -76,8 +75,9 @@ def scrape_linkedin_jobs(job_title: str, location: str, pages: int = None) -> li
             # Log a message indicating that the button was not found and we're retrying
             logging.info("Show more button not found, retrying...")
 
-        # Wait for a random amount of time before scrolling to the next page
-        time.sleep(random.choice(list(range(3, 7))))
+            # Wait for a random amount of time before scrolling to the next page
+            time.sleep(random.choice(list(range(3, 7))))
+
 
     # Scrape the job postings
     jobs = []
@@ -153,6 +153,10 @@ def save_job_data(data: dict) -> None:
     Returns:
         None
     """
+    # if data is empty, return
+    if not data:
+        return
+
     # sort jobs by latest date posted
     data = sorted(data, key=lambda x: x["Date Posted"], reverse=True)
 
